@@ -9,7 +9,6 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     public function home()
@@ -29,8 +28,13 @@ class HomeController extends Controller
 
     public function forms()
     {
+        return view('forms');
+    }
+
+    public function adminItems()
+    {
         $items = Item::latest()->get();
-        return view('forms', compact('items'));
+        return view('admin.items', compact('items'));
     }
 
     public function store(Request $request)
