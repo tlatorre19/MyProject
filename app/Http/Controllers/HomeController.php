@@ -40,12 +40,25 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'          => 'required|string|max:255',
-            'description'   => 'required|string',
-            'date'          => 'required|date',
-            'type'          => 'required|string',
-            'reporter_name' => 'required|string|max:255',
-            'contact_no'    => 'required|string|max:20',
+            'name'          => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-]+$/',
+            'description'   => 'required|string|min:10',
+            'date'          => 'required|date|before_or_equal:today',
+            'type'          => 'required|in:Lost,Found',
+            'reporter_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'contact_no'    => 'required|string|max:20|regex:/^[0-9\+\-\s]+$/',
+        ], [
+            'name.required'          => 'Item name is required.',
+            'name.regex'             => 'Item name can only contain letters, numbers, spaces and dashes.',
+            'description.required'   => 'Description is required.',
+            'description.min'        => 'Description must be at least 10 characters.',
+            'date.required'          => 'Date is required.',
+            'date.before_or_equal'   => 'Date cannot be in the future.',
+            'type.required'          => 'Please select a type.',
+            'type.in'                => 'Type must be Lost or Found.',
+            'reporter_name.required' => 'Reporter name is required.',
+            'reporter_name.regex'    => 'Reporter name can only contain letters and spaces.',
+            'contact_no.required'    => 'Contact number is required.',
+            'contact_no.regex'       => 'Contact number can only contain numbers.',
         ]);
 
         try {
@@ -87,13 +100,26 @@ class HomeController extends Controller
     public function update(Request $request, Item $item)
     {
         $request->validate([
-            'name'          => 'required|string|max:255',
-            'description'   => 'required|string',
-            'date'          => 'required|date',
-            'type'          => 'required|string',
+            'name'          => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-]+$/',
+            'description'   => 'required|string|min:10',
+            'date'          => 'required|date|before_or_equal:today',
+            'type'          => 'required|in:Lost,Found',
             'status'        => 'required|string',
-            'reporter_name' => 'required|string|max:255',
-            'contact_no'    => 'required|string|max:20',
+            'reporter_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'contact_no'    => 'required|string|max:20|regex:/^[0-9\+\-\s]+$/',
+        ], [
+            'name.required'          => 'Item name is required.',
+            'name.regex'             => 'Item name can only contain letters, numbers, spaces and dashes.',
+            'description.required'   => 'Description is required.',
+            'description.min'        => 'Description must be at least 10 characters.',
+            'date.required'          => 'Date is required.',
+            'date.before_or_equal'   => 'Date cannot be in the future.',
+            'type.required'          => 'Please select a type.',
+            'type.in'                => 'Type must be Lost or Found.',
+            'reporter_name.required' => 'Reporter name is required.',
+            'reporter_name.regex'    => 'Reporter name can only contain letters and spaces.',
+            'contact_no.required'    => 'Contact number is required.',
+            'contact_no.regex'       => 'Contact number can only contain numbers.',
         ]);
 
         try {
