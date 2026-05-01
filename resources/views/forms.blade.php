@@ -70,6 +70,27 @@
 </div>
 @endsection
 
+@push('styles')
+<style>
+    .is-invalid {
+        border-color: #dc3545 !important;
+        background-color: #fff8f8 !important;
+    }
+    .is-invalid:focus {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+    }
+    .invalid-feedback {
+        display: none;
+        color: #dc3545;
+        font-size: 0.875em;
+    }
+    .is-invalid ~ .invalid-feedback {
+        display: block;
+    }
+</style>
+@endpush
+
 @push('scripts')
 <script src="{{ asset('assets/js/ajax-handlers.js') }}"></script>
 @endpush
