@@ -64,6 +64,14 @@
                                 @endif
                             </div>
                         </div>
+
+                        {{-- Register link ✅ added --}}
+                        <div class="row mt-3">
+                            <div class="col-md-6 offset-md-4 text-center">
+                                <p>Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
