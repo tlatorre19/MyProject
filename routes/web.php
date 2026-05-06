@@ -36,3 +36,7 @@ Route::post('/category', [CategoryController::class, 'store'])->name('category.s
 Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+Route::get('/forms/{id}/edit',    [HomeController::class, 'edit']);
+Route::put('/forms/{id}',         [HomeController::class, 'update']);
+Route::delete('/forms/{id}',      [HomeController::class, 'destroy']);
