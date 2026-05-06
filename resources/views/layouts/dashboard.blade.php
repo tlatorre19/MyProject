@@ -124,7 +124,7 @@ use Illuminate\Support\Facades\Auth;
                             </div>
                             <div class="notif-content">
                               <span class="subject">Jimmy Denis</span>
-                              <span class="block"> How are you ? </span>
+                              <span class="block">I want to report that i lost my phone</span>
                               <span class="time">5 minutes ago</span>
                             </div>
                           </a>
