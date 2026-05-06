@@ -29,5 +29,8 @@
                                         <p class="mb-0 fw-bold">Instructor</p>
                                     </div>
                                 </div>
+
                                 <input type="hidden" name="role" id="role" value="{{ old('role', 'student') }}">
-                                @error('role')
+                                @if($errors->has('role'))
+                                    <span class="text-danger"><strong>{{ $errors->first('role') }}</strong></span>
+                                @endif
