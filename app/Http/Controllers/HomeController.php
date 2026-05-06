@@ -76,7 +76,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $item = Item::findOrFail($id);
-        return view('forms.edit', compact('item'));
+        return view('items.edit', compact('item')); // ✅ changed from forms.edit
     }
 
     public function update(Request $request, $id)
@@ -86,7 +86,7 @@ class HomeController extends Controller
             'description'   => 'required|string|min:10',
             'date'          => 'required|date|before_or_equal:today',
             'type'          => 'required|in:Lost,Found',
-            'status'        => 'required|in:Pending,Resolved',  
+            'status'        => 'required|in:Pending,Resolved',
             'reporter_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'contact_no'    => 'required|string|max:20|regex:/^[0-9\+\-\s]+$/',
         ], [
@@ -96,7 +96,7 @@ class HomeController extends Controller
             'date.required'          => 'Date is required.',
             'date.before_or_equal'   => 'Date cannot be in the future.',
             'type.required'          => 'Please select a type.',
-            'status.required'        => 'Please select a status.',  
+            'status.required'        => 'Please select a status.',
             'reporter_name.required' => 'Reporter name is required.',
             'reporter_name.regex'    => 'Reporter name must contain letters only.',
             'contact_no.required'    => 'Contact number is required.',
@@ -109,7 +109,7 @@ class HomeController extends Controller
             'description'   => $request->description,
             'date'          => $request->date,
             'type'          => $request->type,
-            'status'        => $request->status,  
+            'status'        => $request->status,
             'reporter_name' => $request->reporter_name,
             'contact_no'    => $request->contact_no,
         ]);
