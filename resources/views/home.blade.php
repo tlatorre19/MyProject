@@ -1,3 +1,11 @@
+<?php
+
+use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+
+?>
+
+
 @extends('layouts.dashboard')
 
 @section('content')
