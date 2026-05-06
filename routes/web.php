@@ -37,6 +37,6 @@ Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->na
 Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-Route::get('/forms/{id}/edit',    [HomeController::class, 'edit']);
-Route::put('/forms/{id}',         [HomeController::class, 'update']);
-Route::delete('/forms/{id}',      [HomeController::class, 'destroy']);
+Route::get('/forms/{id}/edit',  [HomeController::class, 'edit'])->name('forms.edit');
+Route::put('/forms/{id}',       [HomeController::class, 'update'])->name('forms.update');
+Route::delete('/forms/{id}',    [HomeController::class, 'destroy'])->name('forms.destroy');
