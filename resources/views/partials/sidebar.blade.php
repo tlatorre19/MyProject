@@ -79,6 +79,11 @@
                         <span class="sub-item">Add Category</span>
                       </a>
                     </li>
+                    <li>
+                      <a href="{{ route('browse') }}">
+                        <span class="sub-item">Browse</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
