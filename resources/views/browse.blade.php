@@ -76,13 +76,31 @@ use Illuminate\Support\Str;
                                         </div>
                                     @endif
 
-                                    {{-- Status Badge --}}
-                                    <span class="badge bg-{{ $item->status == 'Pending' ? 'warning' : 'success' }}"
-                                          style="position:absolute; top:10px; right:10px; font-size:11px;">
-                                        {{ $item->status }}
-                                    </span>
+                                    {{-- Status + Role Badge (top right) --}}
+                                    <div style="position:absolute; top:10px; right:10px; display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                                        <span class="badge bg-{{ $item->status == 'Pending' ? 'warning' : 'success' }}"
+                                              style="font-size:11px;">
+                                            {{ $item->status }}
+                                        </span>
+                                        @if($item->user)
+                                            @php
+                                                $role = $item->user->role ?? 'User';
+                                                $roleColor = match(strtolower($role)) {
+                                                    'admin'      => '#1a7a4a',
+                                                    'instructor' => '#1a5fa8',
+                                                    'student'    => '#b45309',
+                                                    default      => '#555555',
+                                                };
+                                            @endphp
+                                            <span style="font-size:10px; padding:2px 8px; border-radius:20px;
+                                                         background:{{ $roleColor }}; color:white; font-weight:600;">
+                                                <i class="fas fa-user me-1" style="font-size:9px;"></i>
+                                                {{ ucfirst($role) }}
+                                            </span>
+                                        @endif
+                                    </div>
 
-                                    {{-- Type Badge --}}
+                                    {{-- Type Badge (top left) --}}
                                     <span class="badge bg-{{ $item->type == 'Lost' ? 'danger' : 'success' }}"
                                           style="position:absolute; top:10px; left:10px; font-size:11px;">
                                         {{ $item->type }}
