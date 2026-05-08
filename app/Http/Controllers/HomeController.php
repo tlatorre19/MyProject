@@ -31,6 +31,12 @@ class HomeController extends Controller
         return view('forms');
     }
 
+    public function browse()
+    {
+        $items = Item::latest()->get();
+        return view('browse', compact('items'));
+    }
+
     public function adminItems()
     {
         $items = Item::latest()->get();
