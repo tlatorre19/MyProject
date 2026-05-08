@@ -31,9 +31,19 @@ class HomeController extends Controller
         return view('forms');
     }
 
-    public function browse()
+    public function browse(Request $request)
     {
-        $items = Item::latest()->get();
+        $query = Item::latest();
+
+        if ($request->search) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->type) {
+            $query->where('type', $request->type);
+        }
+
+        $items = $query->get();
         return view('browse', compact('items'));
     }
 
