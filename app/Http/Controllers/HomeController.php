@@ -46,6 +46,7 @@ class HomeController extends Controller
             'type'          => 'required|in:Lost,Found',
             'reporter_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'contact_no'    => 'required|string|max:20|regex:/^[0-9\+\-\s]+$/',
+            'photo'         => 'nullable|image|max:5120',
         ], [
             'name.required'          => 'Item name is required.',
             'description.required'   => 'Description is required.',
@@ -59,6 +60,11 @@ class HomeController extends Controller
             'contact_no.regex'       => 'Contact number must contain numbers only.',
         ]);
 
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+        }
+
         Item::create([
             'user_id'       => auth()->id() ?? null,
             'name'          => $request->name,
@@ -68,6 +74,7 @@ class HomeController extends Controller
             'status'        => 'Pending',
             'reporter_name' => $request->reporter_name,
             'contact_no'    => $request->contact_no,
+            'photo'         => $photoPath,
         ]);
 
         return redirect()->route('forms')->with('success', 'Item reported successfully.');
@@ -76,7 +83,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $item = Item::findOrFail($id);
-        return view('items.edit', compact('item')); // ✅ changed from forms.edit
+        return view('items.edit', compact('item'));
     }
 
     public function update(Request $request, $id)

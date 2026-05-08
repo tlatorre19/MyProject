@@ -16,7 +16,7 @@
             Report Lost or Found Item
         </div>
         <div class="card-body">
-            <form action="{{ route('forms.store') }}" method="POST">
+            <form action="{{ route('forms.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -80,9 +80,92 @@
                     @enderror
                 </div>
 
+                {{-- Photo Upload --}}
+                <div class="mb-3">
+                    <label class="fw-semibold text-muted small text-uppercase">
+                        Upload Photo <span class="fw-normal">(Optional)</span>
+                    </label>
+
+                    <div id="dropZone" style="border: 2px dashed #ccc; border-radius: 8px; padding: 2rem;
+                         text-align: center; cursor: pointer; background: #f9f9f9; position: relative;">
+
+                        <input type="file" name="photo" id="photoInput" accept="image/*"
+                               style="position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;">
+
+                        <div id="uploadPrompt">
+                            <div style="font-size:2.5rem; color:#f0a500;">&#9729;&#65039;</div>
+                            <div style="font-weight:600; color:#333;">Click or drag and drop image here</div>
+                            <div style="font-size:0.8rem; color:#888;">Max file size: 5MB</div>
+                        </div>
+
+                        <div id="previewBox" style="display:none; margin-top:1rem;">
+                            <img id="previewImg" src="" alt="Preview"
+                                 style="max-height:180px; border-radius:8px; border:1px solid #ddd;">
+                            <br>
+                            <button id="removeBtn" type="button"
+                                    style="background:none; border:none; color:#c0392b; font-size:0.8rem;
+                                           text-decoration:underline; cursor:pointer; margin-top:0.5rem;">
+                                Remove photo
+                            </button>
+                        </div>
+                    </div>
+
+                    @error('photo')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+const dropZone = document.getElementById('dropZone');
+const photoInput = document.getElementById('photoInput');
+const previewBox = document.getElementById('previewBox');
+const previewImg = document.getElementById('previewImg');
+const uploadPrompt = document.getElementById('uploadPrompt');
+const removeBtn = document.getElementById('removeBtn');
+
+function showPreview(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 5 * 1024 * 1024) { alert('File too large. Max 5MB.'); return; }
+    let reader = new FileReader();
+    reader.onload = e => {
+        previewImg.src = e.target.result;
+        previewBox.style.display = 'block';
+        uploadPrompt.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+}
+
+photoInput.addEventListener('change', e => showPreview(e.target.files[0]));
+
+dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#0d6efd';
+    dropZone.style.background = '#e8f0fe';
+});
+dropZone.addEventListener('dragleave', () => {
+    dropZone.style.borderColor = '#ccc';
+    dropZone.style.background = '#f9f9f9';
+});
+dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#ccc';
+    dropZone.style.background = '#f9f9f9';
+    showPreview(e.dataTransfer.files[0]);
+});
+
+removeBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    previewImg.src = '';
+    previewBox.style.display = 'none';
+    uploadPrompt.style.display = 'block';
+    photoInput.value = '';
+});
+</script>
+
 @endsection
