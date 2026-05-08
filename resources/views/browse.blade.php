@@ -11,12 +11,6 @@ use Illuminate\Support\Str;
         {{-- Header --}}
         <div class="d-flex align-items-center flex-column flex-md-row pt-2 pb-4">
             <div>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Browse Items</li>
-                    </ol>
-                </nav>
                 <h3 class="fw-bold mb-1">All Items</h3>
                 <h6 class="op-7 mb-2">{{ $items->count() }} items found</h6>
             </div>
