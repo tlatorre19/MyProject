@@ -32,8 +32,8 @@
             {{-- Right: Details --}}
             <div class="col-md-6">
 
-                {{-- Status + ID --}}
-                <div class="d-flex align-items-center gap-2 mb-3">
+                {{-- Status + ID + Type --}}
+                <div class="d-flex align-items-center gap-2 mb-3" style="flex-wrap:wrap;">
                     <span class="badge bg-{{ $item->status == 'Pending' ? 'warning' : 'success' }}"
                           style="font-size:13px; padding:6px 14px; border-radius:20px;">
                         {{ $item->status }}
@@ -108,7 +108,7 @@
                     <p style="font-size:13px; opacity:0.9; margin-bottom:12px;">
                         Are you the owner of this item? Submit your proof to claim it back.
                     </p>
-                    <button class="btn w-100 fw-bold"
+                    <button class="btn w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#claimModal"
                             style="background:white; color:#2d6a4f; border-radius:20px;">
                         <i class="fas fa-user-check me-2"></i> Claim This Item
                     </button>
@@ -118,4 +118,76 @@
         </div>
     </div>
 </div>
+
+{{-- Claim Modal --}}
+<div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:16px; border:none;">
+
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="claimModalLabel">Submit Claim Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body pt-1">
+                <p class="text-muted mb-4" style="font-size:13px;">
+                    To prevent fake claims, please provide accurate details that only the owner would know.
+                </p>
+
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    {{-- Detailed Description --}}
+                    <div class="mb-3">
+                        <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
+                            Detailed Description
+                        </label>
+                        <textarea name="claim_description" class="form-control" rows="3"
+                                  placeholder="Describe specific details of the item..." required></textarea>
+                    </div>
+
+                    {{-- Color / Brand --}}
+                    <div class="mb-3">
+                        <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
+                            Color / Brand
+                        </label>
+                        <input type="text" name="color_brand" class="form-control"
+                               placeholder="e.g. Silver / Apple">
+                    </div>
+
+                    {{-- Unique Marks --}}
+                    <div class="mb-3">
+                        <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
+                            Unique Marks / Features
+                        </label>
+                        <textarea name="unique_marks" class="form-control" rows="3"
+                                  placeholder="Scratches, specific stickers, contents inside, etc."></textarea>
+                    </div>
+
+                    {{-- Upload ID or Proof --}}
+                    <div class="mb-4">
+                        <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
+                            Upload ID or Proof <span class="fw-normal text-muted">(Optional)</span>
+                        </label>
+                        <input type="file" name="proof" class="form-control" accept="image/*,.pdf">
+                        <small class="text-muted mt-1 d-block">Receipt, photo of you with the item, or Student ID.</small>
+                    </div>
+
+                    <button type="submit" class="btn w-100 fw-bold"
+                            style="background:#2d6a4f; color:white; border-radius:20px; padding:12px;">
+                        Submit Proof & Claim
+                    </button>
+
+                </form>
+
+                <p class="text-center text-muted mt-3" style="font-size:11px;">
+                    <i class="fas fa-shield-alt me-1"></i>
+                    Security Notice: All claims are securely stored and verified by admins.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @endsection
