@@ -53,6 +53,34 @@ class HomeController extends Controller
         return view('items.show', compact('item'));
     }
 
+    public function submitClaim(Request $request, $id)
+    {
+        $request->validate([
+            'claim_description' => 'required|string|min:10',
+            'color_brand'       => 'nullable|string|max:255',
+            'unique_marks'      => 'nullable|string',
+            'proof'             => 'nullable|image|max:5120',
+        ]);
+
+        $proofPath = null;
+        if ($request->hasFile('proof')) {
+            $proofPath = $request->file('proof')->store('proofs', 'public');
+        }
+
+        \App\Models\Claim::create([
+            'item_id'           => $id,
+            'user_id'           => auth()->id(),
+            'claim_description' => $request->claim_description,
+            'color_brand'       => $request->color_brand,
+            'unique_marks'      => $request->unique_marks,
+            'proof'             => $proofPath,
+            'status'            => 'Pending',
+        ]);
+
+        return redirect()->route('items.show', $id)->with('success', 'Your claim has been submitted successfully!');
+    }
+
+
     public function adminItems()
     {
         $items = Item::latest()->get();
