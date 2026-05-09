@@ -47,6 +47,12 @@ class HomeController extends Controller
         return view('browse', compact('items'));
     }
 
+    public function show($id)
+    {
+        $item = Item::with('user')->findOrFail($id);
+        return view('items.show', compact('item'));
+    }
+
     public function adminItems()
     {
         $items = Item::latest()->get();
