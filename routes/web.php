@@ -15,6 +15,7 @@ Route::get('/charts', [HomeController::class, 'charts'])->name('charts');
 Route::get('/iconmenu', [HomeController::class, 'iconmenu'])->name('iconmenu');
 Route::get('/browse', [HomeController::class, 'browse'])->name('browse');
 Route::get('/browse/{item}', [HomeController::class, 'show'])->name('items.show');
+Route::post('/browse/{item}/claim', [HomeController::class, 'submitClaim'])->name('items.claim');
 
 Route::get('/forms', [HomeController::class, 'forms'])->name('forms');
 Route::post('/forms/store', [HomeController::class, 'store'])->name('forms.store');
