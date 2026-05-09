@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Auth;
     />
     <link
       rel="icon"
-      href="assets/img/kaiadmin/favicon.ico"
+      href="/assets/img/kaiadmin/favicon.ico"
       type="image/x-icon"
     />
 
     <!-- Fonts and icons -->
-    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
       WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
             "Font Awesome 5 Brands",
             "simple-line-icons",
           ],
-          urls: ["assets/css/fonts.min.css"],
+          urls: ["/assets/css/fonts.min.css"],
         },
         active: function () {
           sessionStorage.fonts = true;
@@ -38,10 +38,10 @@ use Illuminate\Support\Facades\Auth;
     </script>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="assets/css/demo.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="/assets/css/demo.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Auth;
             <div class="logo-header" data-background-color="dark">
               <a href="index.html" class="logo">
                 <img
-                  src="assets/img/kaiadmin/logo_light.svg"
+                  src="/assets/img/kaiadmin/logo_light.svg"
                   alt="navbar brand"
                   class="navbar-brand"
                   height="20"
@@ -120,7 +120,7 @@ use Illuminate\Support\Facades\Auth;
                         <div class="notif-center">
                           <a href="#">
                             <div class="notif-img">
-                              <img src="assets/img/jm_denis.jpg" alt="Img Profile" />
+                              <img src="/assets/img/jm_denis.jpg" alt="Img Profile" />
                             </div>
                             <div class="notif-content">
                               <span class="subject">Jimmy Denis</span>
@@ -171,11 +171,11 @@ use Illuminate\Support\Facades\Auth;
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                      <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
+                      <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">{{ Auth::user()->name }}</span> 
+                      <span class="fw-bold">{{ Auth::user()->name }}</span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -183,11 +183,11 @@ use Illuminate\Support\Facades\Auth;
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
+                            <img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
                           </div>
                           <div class="u-text">
-                            <h4>{{ Auth::user()->name }}</h4> 
-                            <p class="text-muted">{{ Auth::user()->email }}</p> 
+                            <h4>{{ Auth::user()->name }}</h4>
+                            <p class="text-muted">{{ Auth::user()->email }}</p>
                             <a href="#" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                           </div>
                         </div>
@@ -199,8 +199,6 @@ use Illuminate\Support\Facades\Auth;
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Account Setting</a>
                         <div class="dropdown-divider"></div>
-
-                        {{-- ✅ Dynamic Logout --}}
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
@@ -289,21 +287,21 @@ use Illuminate\Support\Facades\Auth;
     </div>
 
     <!-- Core JS Files -->
-    <script src="assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="assets/js/core/popper.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
-    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <script src="assets/js/plugin/chart.js/chart.min.js"></script>
-    <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-    <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
-    <script src="assets/js/plugin/datatables/datatables.min.js"></script>
-    <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="assets/js/plugin/jsvectormap/world.js"></script>
-    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
-    <script src="assets/js/kaiadmin.min.js"></script>
-    <script src="assets/js/setting-demo.js"></script>
-    <script src="assets/js/demo.js"></script>
+    <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/assets/js/plugin/chart.js/chart.min.js"></script>
+    <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
+    <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+    <script src="/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="/assets/js/plugin/jsvectormap/world.js"></script>
+    <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="/assets/js/kaiadmin.min.js"></script>
+    <script src="/assets/js/setting-demo.js"></script>
+    <script src="/assets/js/demo.js"></script>
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line", height: "70", width: "100%",
