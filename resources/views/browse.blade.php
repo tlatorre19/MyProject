@@ -117,7 +117,7 @@ use Illuminate\Support\Str;
                                         {{ Str::limit($item->description, 60) }}
                                     </p>
                                     <div class="mt-auto">
-                                        <a href="{{ route('forms.edit', $item->id) }}"
+                                        <a href="{{ route('items.show', $item->id) }}"
                                            class="btn btn-success btn-sm w-100 rounded-pill">
                                             View Details
                                         </a>
