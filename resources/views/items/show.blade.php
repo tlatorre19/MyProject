@@ -11,6 +11,13 @@
                 <li class="breadcrumb-item active">Item Details</li>
             </ol>
         </nav>
+        
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
 
         <div class="row">
 
@@ -134,7 +141,7 @@
                     To prevent fake claims, please provide accurate details that only the owner would know.
                 </p>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('items.claim', $item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     {{-- Detailed Description --}}
