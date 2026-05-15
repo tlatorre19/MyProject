@@ -28,7 +28,8 @@ class HomeController extends Controller
 
     public function forms()
     {
-        return view('forms');
+        $categories = \App\Models\Category::orderBy('name')->get();
+        return view('forms', compact('categories'));
     }
 
     public function browse(Request $request)
