@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function browse(Request $request)
     {
-        $query = Item::latest();
+        $query = Item::with('user')->latest();
 
         if ($request->search) {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -44,8 +44,13 @@ class HomeController extends Controller
             $query->where('type', $request->type);
         }
 
+        if ($request->category) {
+            $query->where('category', $request->category);
+        }
+
         $items = $query->get();
-        return view('browse', compact('items'));
+        $categories = \App\Models\Category::orderBy('name')->get();
+        return view('browse', compact('items', 'categories'));
     }
 
     public function show($id)
@@ -81,7 +86,6 @@ class HomeController extends Controller
         return redirect()->route('items.show', $id)->with('success', 'Your claim has been submitted successfully!');
     }
 
-
     public function adminItems()
     {
         $items = Item::latest()->get();
@@ -92,6 +96,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'name'          => 'required|string|max:255',
+            'category'      => 'nullable|string|max:255',
             'description'   => 'required|string|min:10',
             'date'          => 'required|date|before_or_equal:today',
             'type'          => 'required|in:Lost,Found',
@@ -119,6 +124,7 @@ class HomeController extends Controller
         Item::create([
             'user_id'       => auth()->id() ?? null,
             'name'          => $request->name,
+            'category'      => $request->category,
             'description'   => $request->description,
             'date'          => $request->date,
             'type'          => $request->type,
