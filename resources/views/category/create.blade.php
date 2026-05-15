@@ -1,100 +1,158 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Add Category</h2>
+    <div class="page-inner">
 
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            New Category
+        {{-- Header --}}
+        <div class="pt-2 pb-4">
+            <h3 class="fw-bold mb-1">Add Category</h3>
+            <h6 class="text-muted">Add a new category for lost and found items</h6>
         </div>
-        <div class="card-body">
-            <form action="{{ route('category.store') }}" method="POST">
-                @csrf
 
-                <div class="mb-3">
-                    <label>Category</label>
-                    <select name="name" class="form-select @error('name') is-invalid @enderror">
-                        <option value="">Select Category</option>
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
 
-                        <optgroup label="Electronics">
-                            <option value="Phones" {{ old('name') == 'Phones' ? 'selected' : '' }}>Phones</option>
-                            <option value="Laptops" {{ old('name') == 'Laptops' ? 'selected' : '' }}>Laptops</option>
-                            <option value="Tablets" {{ old('name') == 'Tablets' ? 'selected' : '' }}>Tablets</option>
-                            <option value="Earphones" {{ old('name') == 'Earphones' ? 'selected' : '' }}>Earphones</option>
-                            <option value="Chargers" {{ old('name') == 'Chargers' ? 'selected' : '' }}>Chargers</option>
-                        </optgroup>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-round" style="border:none; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
 
-                        <optgroup label="Clothing & Accessories">
-                            <option value="Shirts" {{ old('name') == 'Shirts' ? 'selected' : '' }}>Shirts</option>
-                            <option value="Pants" {{ old('name') == 'Pants' ? 'selected' : '' }}>Pants</option>
-                            <option value="Jackets" {{ old('name') == 'Jackets' ? 'selected' : '' }}>Jackets</option>
-                            <option value="Hats" {{ old('name') == 'Hats' ? 'selected' : '' }}>Hats</option>
-                            <option value="Bags" {{ old('name') == 'Bags' ? 'selected' : '' }}>Bags</option>
-                        </optgroup>
+                    {{-- Card Header --}}
+                    <div class="card-header border-0 pb-0 pt-4 px-4"
+                         style="background:white; border-radius:16px 16px 0 0;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div style="width:46px; height:46px; border-radius:12px;
+                                        background:linear-gradient(135deg,#2d6a4f,#40916c);
+                                        display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-folder-plus" style="color:white; font-size:18px;"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0" style="color:#1b4332;">New Category</h5>
+                                <small class="text-muted">SNSU Lost & Found System</small>
+                            </div>
+                        </div>
+                        <hr class="mt-3 mb-0">
+                    </div>
 
-                        <optgroup label="Documents">
-                            <option value="ID Cards" {{ old('name') == 'ID Cards' ? 'selected' : '' }}>ID Cards</option>
-                            <option value="Passports" {{ old('name') == 'Passports' ? 'selected' : '' }}>Passports</option>
-                            <option value="Licenses" {{ old('name') == 'Licenses' ? 'selected' : '' }}>Licenses</option>
-                            <option value="Cards" {{ old('name') == 'Cards' ? 'selected' : '' }}>Cards</option>
-                        </optgroup>
+                    <div class="card-body px-4 pt-3 pb-4">
+                        <form action="{{ route('category.store') }}" method="POST">
+                            @csrf
 
-                        <optgroup label="Jewelry & Valuables">
-                            <option value="Rings" {{ old('name') == 'Rings' ? 'selected' : '' }}>Rings</option>
-                            <option value="Necklaces" {{ old('name') == 'Necklaces' ? 'selected' : '' }}>Necklaces</option>
-                            <option value="Watches" {{ old('name') == 'Watches' ? 'selected' : '' }}>Watches</option>
-                            <option value="Bracelets" {{ old('name') == 'Bracelets' ? 'selected' : '' }}>Bracelets</option>
-                        </optgroup>
+                            {{-- Category --}}
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-uppercase"
+                                       style="font-size:11px; color:#555; letter-spacing:0.05em;">
+                                    <i class="fas fa-tag me-1 text-success"></i> Category
+                                </label>
+                                <select name="name"
+                                    class="form-select @error('name') is-invalid @enderror"
+                                    style="border-radius:10px; border:1.5px solid #e0e0e0; padding:10px 14px;">
+                                    <option value="">Select Category</option>
 
-                        <optgroup label="School Supplies">
-                            <option value="Books" {{ old('name') == 'Books' ? 'selected' : '' }}>Books</option>
-                            <option value="Notebooks" {{ old('name') == 'Notebooks' ? 'selected' : '' }}>Notebooks</option>
-                            <option value="Pens" {{ old('name') == 'Pens' ? 'selected' : '' }}>Pens</option>
-                            <option value="Calculators" {{ old('name') == 'Calculators' ? 'selected' : '' }}>Calculators</option>
-                        </optgroup>
+                                    <optgroup label="Electronics">
+                                        <option value="Phones" {{ old('name') == 'Phones' ? 'selected' : '' }}>Phones</option>
+                                        <option value="Laptops" {{ old('name') == 'Laptops' ? 'selected' : '' }}>Laptops</option>
+                                        <option value="Tablets" {{ old('name') == 'Tablets' ? 'selected' : '' }}>Tablets</option>
+                                        <option value="Earphones" {{ old('name') == 'Earphones' ? 'selected' : '' }}>Earphones</option>
+                                        <option value="Chargers" {{ old('name') == 'Chargers' ? 'selected' : '' }}>Chargers</option>
+                                    </optgroup>
 
-                        <optgroup label="Keys">
-                            <option value="House Keys" {{ old('name') == 'House Keys' ? 'selected' : '' }}>House Keys</option>
-                            <option value="Car Keys" {{ old('name') == 'Car Keys' ? 'selected' : '' }}>Car Keys</option>
-                            <option value="Padlocks" {{ old('name') == 'Padlocks' ? 'selected' : '' }}>Padlocks</option>
-                        </optgroup>
+                                    <optgroup label="Clothing & Accessories">
+                                        <option value="Shirts" {{ old('name') == 'Shirts' ? 'selected' : '' }}>Shirts</option>
+                                        <option value="Pants" {{ old('name') == 'Pants' ? 'selected' : '' }}>Pants</option>
+                                        <option value="Jackets" {{ old('name') == 'Jackets' ? 'selected' : '' }}>Jackets</option>
+                                        <option value="Hats" {{ old('name') == 'Hats' ? 'selected' : '' }}>Hats</option>
+                                        <option value="Bags" {{ old('name') == 'Bags' ? 'selected' : '' }}>Bags</option>
+                                    </optgroup>
 
-                        <optgroup label="Wallets & Purses">
-                            <option value="Wallets" {{ old('name') == 'Wallets' ? 'selected' : '' }}>Wallets</option>
-                            <option value="Purses" {{ old('name') == 'Purses' ? 'selected' : '' }}>Purses</option>
-                            <option value="Coin Purses" {{ old('name') == 'Coin Purses' ? 'selected' : '' }}>Coin Purses</option>
-                        </optgroup>
+                                    <optgroup label="Documents">
+                                        <option value="ID Cards" {{ old('name') == 'ID Cards' ? 'selected' : '' }}>ID Cards</option>
+                                        <option value="Passports" {{ old('name') == 'Passports' ? 'selected' : '' }}>Passports</option>
+                                        <option value="Licenses" {{ old('name') == 'Licenses' ? 'selected' : '' }}>Licenses</option>
+                                        <option value="Cards" {{ old('name') == 'Cards' ? 'selected' : '' }}>Cards</option>
+                                    </optgroup>
 
-                        <optgroup label="Sports Equipment">
-                            <option value="Balls" {{ old('name') == 'Balls' ? 'selected' : '' }}>Balls</option>
-                            <option value="Rackets" {{ old('name') == 'Rackets' ? 'selected' : '' }}>Rackets</option>
-                            <option value="Helmets" {{ old('name') == 'Helmets' ? 'selected' : '' }}>Helmets</option>
-                            <option value="Gloves" {{ old('name') == 'Gloves' ? 'selected' : '' }}>Gloves</option>
-                        </optgroup>
+                                    <optgroup label="Jewelry & Valuables">
+                                        <option value="Rings" {{ old('name') == 'Rings' ? 'selected' : '' }}>Rings</option>
+                                        <option value="Necklaces" {{ old('name') == 'Necklaces' ? 'selected' : '' }}>Necklaces</option>
+                                        <option value="Watches" {{ old('name') == 'Watches' ? 'selected' : '' }}>Watches</option>
+                                        <option value="Bracelets" {{ old('name') == 'Bracelets' ? 'selected' : '' }}>Bracelets</option>
+                                    </optgroup>
 
-                        <optgroup label="Others">
-                            <option value="Others" {{ old('name') == 'Others' ? 'selected' : '' }}>Others</option>
-                        </optgroup>
-                    </select>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                                    <optgroup label="School Supplies">
+                                        <option value="Books" {{ old('name') == 'Books' ? 'selected' : '' }}>Books</option>
+                                        <option value="Notebooks" {{ old('name') == 'Notebooks' ? 'selected' : '' }}>Notebooks</option>
+                                        <option value="Pens" {{ old('name') == 'Pens' ? 'selected' : '' }}>Pens</option>
+                                        <option value="Calculators" {{ old('name') == 'Calculators' ? 'selected' : '' }}>Calculators</option>
+                                    </optgroup>
+
+                                    <optgroup label="Keys">
+                                        <option value="House Keys" {{ old('name') == 'House Keys' ? 'selected' : '' }}>House Keys</option>
+                                        <option value="Car Keys" {{ old('name') == 'Car Keys' ? 'selected' : '' }}>Car Keys</option>
+                                        <option value="Padlocks" {{ old('name') == 'Padlocks' ? 'selected' : '' }}>Padlocks</option>
+                                    </optgroup>
+
+                                    <optgroup label="Wallets & Purses">
+                                        <option value="Wallets" {{ old('name') == 'Wallets' ? 'selected' : '' }}>Wallets</option>
+                                        <option value="Purses" {{ old('name') == 'Purses' ? 'selected' : '' }}>Purses</option>
+                                        <option value="Coin Purses" {{ old('name') == 'Coin Purses' ? 'selected' : '' }}>Coin Purses</option>
+                                    </optgroup>
+
+                                    <optgroup label="Sports Equipment">
+                                        <option value="Balls" {{ old('name') == 'Balls' ? 'selected' : '' }}>Balls</option>
+                                        <option value="Rackets" {{ old('name') == 'Rackets' ? 'selected' : '' }}>Rackets</option>
+                                        <option value="Helmets" {{ old('name') == 'Helmets' ? 'selected' : '' }}>Helmets</option>
+                                        <option value="Gloves" {{ old('name') == 'Gloves' ? 'selected' : '' }}>Gloves</option>
+                                    </optgroup>
+
+                                    <optgroup label="Others">
+                                        <option value="Others" {{ old('name') == 'Others' ? 'selected' : '' }}>Others</option>
+                                    </optgroup>
+                                </select>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- Description --}}
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-uppercase"
+                                       style="font-size:11px; color:#555; letter-spacing:0.05em;">
+                                    <i class="fas fa-align-left me-1 text-success"></i> Description
+                                </label>
+                                <textarea name="description" rows="4"
+                                    class="form-control @error('description') is-invalid @enderror"
+                                    placeholder="Describe this category..."
+                                    style="border-radius:10px; border:1.5px solid #e0e0e0; padding:10px 14px;">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- Buttons --}}
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn fw-bold px-4"
+                                        style="background:linear-gradient(135deg,#2d6a4f,#40916c);
+                                               color:white; border-radius:10px; padding:10px 28px;">
+                                    <i class="fas fa-save me-2"></i> Save Category
+                                </button>
+                                <a href="{{ route('category.index') }}" class="btn fw-bold px-4"
+                                   style="border:1.5px solid #ccc; border-radius:10px;
+                                          padding:10px 28px; color:#666;">
+                                    Cancel
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label>Description</label>
-                    <textarea name="description"
-                              class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <a href="{{ route('category.index') }}" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-success">Save</button>
-            </form>
+            </div>
         </div>
+
     </div>
 </div>
 @endsection
