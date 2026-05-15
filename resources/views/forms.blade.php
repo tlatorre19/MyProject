@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+@php use Illuminate\Support\Facades\Auth; @endphp
 @section('content')
 <div class="container">
     <div class="page-inner">
@@ -111,10 +111,11 @@
                                            style="font-size:11px; color:#555; letter-spacing:0.05em;">
                                         <i class="fas fa-user me-1 text-success"></i> Reporter Name
                                     </label>
-                                    <input type="text" name="reporter_name" value="{{ old('reporter_name') }}"
+                                    <input type="text" name="reporter_name" value="{{ old('reporter_name', Auth::user()->name) }}"
                                         class="form-control @error('reporter_name') is-invalid @enderror"
                                         placeholder="Enter your full name"
-                                        style="border-radius:10px; border:1.5px solid #e0e0e0; padding:10px 14px;">
+                                        style="border-radius:10px; border:1.5px solid #e0e0e0; padding:10px 14px;"
+                                        readonly>
                                     @error('reporter_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
