@@ -76,7 +76,7 @@
             color: rgba(255,255,255,0.5);
         }
 
-        /* Right side - Login Form */
+        
         .form-side {
             flex: 1;
             background: white;
@@ -175,9 +175,9 @@
             </svg>
         </div>
 
-        <h1>Lost & Found<br>Management System</h1>
-        <p>Helping the community recover lost items and reunite them with their owners.</p>
-        <div class="system-tag">Recovery System</div>
+       <h1>Lost & Found<br>Management System</h1>
+       <p>The official lost and found system of <strong style="color:white;">Surigao del Norte State University</strong> helping students and staff recover missing belongings on campus.</p>
+       <div class="system-tag">SNSU Recovery System</div>
 
     </div>
 
