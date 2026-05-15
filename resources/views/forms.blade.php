@@ -75,6 +75,28 @@
                                     @enderror
                                 </div>
                             </div>
+                             
+                            {{-- Category --}}
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-uppercase"
+                                       style="font-size:11px; color:#555; letter-spacing:0.05em;">
+                                    <i class="fas fa-folder me-1 text-success"></i> Category
+                                </label>
+                                <select name="category"
+                                    class="form-select @error('category') is-invalid @enderror"
+                                    style="border-radius:10px; border:1.5px solid #e0e0e0; padding:10px 14px;">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->name }}"
+                                            {{ old('category') == $category->name ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             {{-- Description --}}
                             <div class="mb-3">
