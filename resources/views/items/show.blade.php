@@ -7,11 +7,11 @@
         {{-- Breadcrumb --}}
         <nav aria-label="breadcrumb" class="pt-2 pb-3">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('browse') }}" class="text-success">Browse Items</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('browse') }}" class="text-primary">Browse Items</a></li>
                 <li class="breadcrumb-item active">Item Details</li>
             </ol>
         </nav>
-        
+
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -55,22 +55,22 @@
                 </div>
 
                 {{-- Item Name --}}
-                <h2 class="fw-bold mb-3" style="color:#1a7a4a;">{{ $item->name }}</h2>
+                <h2 class="fw-bold mb-3" style="color:#1a4a8a;">{{ $item->name }}</h2>
 
                 {{-- Info Card --}}
-                <div class="card card-round p-3 mb-3" style="background:#f9f9f9;">
+                <div class="card card-round p-3 mb-3" style="background:#f0f6ff;">
                     <div class="row">
                         <div class="col-6 mb-3">
                             <p class="text-uppercase text-muted mb-1" style="font-size:11px; font-weight:600;">Date Reported</p>
                             <p class="fw-bold mb-0">
-                                <i class="fas fa-calendar me-1 text-success"></i>
+                                <i class="fas fa-calendar me-1 text-primary"></i>
                                 {{ \Carbon\Carbon::parse($item->date)->format('M d, Y') }}
                             </p>
                         </div>
                         <div class="col-6 mb-3">
                             <p class="text-uppercase text-muted mb-1" style="font-size:11px; font-weight:600;">Contact No.</p>
                             <p class="fw-bold mb-0">
-                                <i class="fas fa-phone me-1 text-success"></i>
+                                <i class="fas fa-phone me-1 text-primary"></i>
                                 {{ $item->contact_no }}
                             </p>
                         </div>
@@ -79,12 +79,12 @@
 
                 {{-- Description --}}
                 <div class="mb-4">
-                    <p class="text-success fw-bold mb-1">Description</p>
+                    <p class="fw-bold mb-1" style="color:#1a4a8a;">Description</p>
                     <p class="text-muted">{{ $item->description }}</p>
                 </div>
 
                 {{-- Reporter Card --}}
-                <div class="card card-round p-3" style="background:#2d6a4f; color:white;">
+                <div class="card card-round p-3" style="background:linear-gradient(135deg,#1a4a8a,#2563eb); color:white;">
                     <div class="d-flex align-items-center mb-2">
                         <div style="width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.2);
                                     display:flex; align-items:center; justify-content:center; margin-right:12px;">
@@ -116,7 +116,7 @@
                         Are you the owner of this item? Submit your proof to claim it back.
                     </p>
                     <button class="btn w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#claimModal"
-                            style="background:white; color:#2d6a4f; border-radius:20px;">
+                            style="background:white; color:#1a4a8a; border-radius:20px;">
                         <i class="fas fa-user-check me-2"></i> Claim This Item
                     </button>
                 </div>
@@ -144,7 +144,6 @@
                 <form action="{{ route('items.claim', $item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Detailed Description --}}
                     <div class="mb-3">
                         <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
                             Detailed Description
@@ -153,7 +152,6 @@
                                   placeholder="Describe specific details of the item..." required></textarea>
                     </div>
 
-                    {{-- Color / Brand --}}
                     <div class="mb-3">
                         <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
                             Color / Brand
@@ -162,7 +160,6 @@
                                placeholder="e.g. Silver / Apple">
                     </div>
 
-                    {{-- Unique Marks --}}
                     <div class="mb-3">
                         <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
                             Unique Marks / Features
@@ -171,7 +168,6 @@
                                   placeholder="Scratches, specific stickers, contents inside, etc."></textarea>
                     </div>
 
-                    {{-- Upload ID or Proof --}}
                     <div class="mb-4">
                         <label class="text-uppercase fw-bold mb-1" style="font-size:11px; color:#333;">
                             Upload ID or Proof <span class="fw-normal text-muted">(Optional)</span>
@@ -181,7 +177,7 @@
                     </div>
 
                     <button type="submit" class="btn w-100 fw-bold"
-                            style="background:#2d6a4f; color:white; border-radius:20px; padding:12px;">
+                            style="background:linear-gradient(135deg,#1a4a8a,#2563eb); color:white; border-radius:20px; padding:12px;">
                         Submit Proof & Claim
                     </button>
 

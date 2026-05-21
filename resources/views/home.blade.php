@@ -137,7 +137,7 @@ use App\Models\Item;
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('forms.edit', $item->id) }}"
+                                                <a href="{{ route('items.show', $item->id) }}"
                                                     class="btn btn-sm btn-outline-primary rounded-pill">
                                                     View Details
                                                 </a>
@@ -200,7 +200,7 @@ use App\Models\Item;
             </div>
         </div>
 
-        {{-- Claim Requests --}}
+        {{-- Your Reported Items --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-round">
@@ -253,6 +253,8 @@ use App\Models\Item;
                                                 @endif
                                             </td>
                                             <td>
+                                                <a href="{{ route('items.show', $item->id) }}"
+                                                    class="btn btn-sm btn-info">View</a>
                                                 <a href="{{ route('forms.edit', $item->id) }}"
                                                     class="btn btn-sm btn-warning">Edit</a>
                                                 <form action="{{ route('forms.destroy', $item->id) }}"
