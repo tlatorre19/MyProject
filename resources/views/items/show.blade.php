@@ -23,7 +23,7 @@
 
             {{-- Left: Image --}}
             <div class="col-md-6 mb-4">
-                <div style="border-radius:16px; overflow:hidden; height:380px; background:#f0f0f0;">
+                <div style="border-radius:16px; overflow:hidden; height:550px; background:#f0f0f0;">
                     @if($item->photo)
                         <img src="{{ asset('storage/' . $item->photo) }}"
                              alt="{{ $item->name }}"
