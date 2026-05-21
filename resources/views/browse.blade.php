@@ -46,12 +46,16 @@ use Illuminate\Support\Str;
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="type" value="Found" id="typeFound"
                                         {{ request('type') == 'Found' ? 'checked' : '' }}>
-                                    <label class="form-check-label text-success" for="typeFound">Found</label>
+                                    <label class="form-check-label text-primary" for="typeFound">Found</label>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-sm w-100 mb-2">Apply Filters</button>
+                        <button type="submit" class="btn btn-sm w-100 mb-2 fw-bold"
+                                style="background:linear-gradient(135deg,#1a4a8a,#2563eb);
+                                       color:white; border-radius:10px;">
+                            Apply Filters
+                        </button>
                         <a href="{{ route('browse') }}" class="btn btn-outline-secondary btn-sm w-100">Reset</a>
                     </form>
                 </div>
@@ -86,7 +90,7 @@ use Illuminate\Support\Str;
                                             @php
                                                 $role = $item->user->role ?? 'User';
                                                 $roleColor = match(strtolower($role)) {
-                                                    'admin'      => '#1a7a4a',
+                                                    'admin'      => '#1a4a8a',
                                                     'instructor' => '#1a5fa8',
                                                     'student'    => '#b45309',
                                                     default      => '#555555',
@@ -101,7 +105,7 @@ use Illuminate\Support\Str;
                                     </div>
 
                                     {{-- Type Badge (top left) --}}
-                                    <span class="badge bg-{{ $item->type == 'Lost' ? 'danger' : 'success' }}"
+                                    <span class="badge bg-{{ $item->type == 'Lost' ? 'danger' : 'primary' }}"
                                           style="position:absolute; top:10px; left:10px; font-size:11px;">
                                         {{ $item->type }}
                                     </span>
@@ -109,7 +113,7 @@ use Illuminate\Support\Str;
 
                                 <div class="card-body d-flex flex-column">
                                     <p class="text-muted mb-1" style="font-size:11px;">
-                                        <i class="fas fa-calendar me-1"></i>
+                                        <i class="fas fa-calendar me-1 text-primary"></i>
                                         {{ \Carbon\Carbon::parse($item->date)->format('M d, Y') }}
                                     </p>
                                     <h6 class="fw-bold mb-1">{{ $item->name }}</h6>
@@ -118,7 +122,8 @@ use Illuminate\Support\Str;
                                     </p>
                                     <div class="mt-auto">
                                         <a href="{{ route('items.show', $item->id) }}"
-                                           class="btn btn-success btn-sm w-100 rounded-pill">
+                                           class="btn btn-sm w-100 rounded-pill fw-bold"
+                                           style="background:linear-gradient(135deg,#1a4a8a,#2563eb); color:white;">
                                             View Details
                                         </a>
                                     </div>

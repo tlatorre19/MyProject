@@ -26,12 +26,12 @@
                          style="background:white; border-radius:16px 16px 0 0;">
                         <div class="d-flex align-items-center gap-3">
                             <div style="width:46px; height:46px; border-radius:12px;
-                                        background:linear-gradient(135deg,#2d6a4f,#40916c);
+                                        background:linear-gradient(135deg,#1a4a8a,#2563eb);
                                         display:flex; align-items:center; justify-content:center;">
                                 <i class="fas fa-folder-plus" style="color:white; font-size:18px;"></i>
                             </div>
                             <div>
-                                <h5 class="fw-bold mb-0" style="color:#1b4332;">New Category</h5>
+                                <h5 class="fw-bold mb-0" style="color:#1e3a5f;">New Category</h5>
                                 <small class="text-muted">SNSU Lost & Found System</small>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold text-uppercase"
                                        style="font-size:11px; color:#555; letter-spacing:0.05em;">
-                                    <i class="fas fa-tag me-1 text-success"></i> Category
+                                    <i class="fas fa-tag me-1 text-primary"></i> Category
                                 </label>
                                 <select name="name"
                                     class="form-select @error('name') is-invalid @enderror"
@@ -122,7 +122,7 @@
                             <div class="mb-4">
                                 <label class="form-label fw-semibold text-uppercase"
                                        style="font-size:11px; color:#555; letter-spacing:0.05em;">
-                                    <i class="fas fa-align-left me-1 text-success"></i> Description
+                                    <i class="fas fa-align-left me-1 text-primary"></i> Description
                                 </label>
                                 <textarea name="description" rows="4"
                                     class="form-control @error('description') is-invalid @enderror"
@@ -136,7 +136,7 @@
                             {{-- Buttons --}}
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn fw-bold px-4"
-                                        style="background:linear-gradient(135deg,#2d6a4f,#40916c);
+                                        style="background:linear-gradient(135deg,#1a4a8a,#2563eb);
                                                color:white; border-radius:10px; padding:10px 28px;">
                                     <i class="fas fa-save me-2"></i> Save Category
                                 </button>
