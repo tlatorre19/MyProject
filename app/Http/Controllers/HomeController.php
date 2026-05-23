@@ -86,9 +86,23 @@ class HomeController extends Controller
         return redirect()->route('items.show', $id)->with('success', 'Your claim has been submitted successfully!');
     }
 
-    public function adminItems()
+    public function adminItems(Request $request)
     {
-        $items = Item::latest()->get();
+        $query = Item::latest();
+
+        if ($request->search) {
+            $query->where(function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%')
+                  ->orWhere('reporter_name', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        $items = $query->get();
         return view('admin.items', compact('items'));
     }
 
