@@ -5,7 +5,6 @@ use App\Models\Item;
 
 ?>
 
-
 @extends('layouts.dashboard')
 
 @section('content')
@@ -97,10 +96,14 @@ use App\Models\Item;
             </div>
         </div>
 
-        {{-- Activity Log + Updates --}}
+        {{-- Main Content Row --}}
         <div class="row">
+
+            {{-- LEFT SIDE: Activity Log + Reported Items --}}
             <div class="col-md-8">
-                <div class="card card-round">
+
+                {{-- Activity Log --}}
+                <div class="card card-round mb-4">
                     <div class="card-header">
                         <div class="card-head-row">
                             <div class="card-title">Your Activity Log</div>
@@ -155,54 +158,8 @@ use App\Models\Item;
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                {{-- Updates Card --}}
-                <div class="card card-round mb-4">
-                    <div class="card-header">
-                        <div class="card-head-row">
-                            <div class="card-title">Updates</div>
-                            <span class="badge bg-primary ms-2">
-                                {{ App\Models\Item::where('status', 'Pending')->count() }}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card-body text-center py-5">
-                        @if(App\Models\Item::where('user_id', Auth::id())->where('status', 'Pending')->count() > 0)
-                            @foreach(App\Models\Item::where('user_id', Auth::id())->where('status','Pending')->latest()->take(3)->get() as $pending)
-                                <div class="d-flex align-items-center mb-3 text-start">
-                                    <i class="fas fa-circle text-warning me-2" style="font-size:8px;"></i>
-                                    <div>
-                                        <p class="mb-0 fw-bold">{{ $pending->name }}</p>
-                                        <small class="text-muted">{{ $pending->type }} — Pending</small>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <i class="fas fa-check-circle text-success mb-3" style="font-size:48px;"></i>
-                            <p class="text-muted">All caught up!</p>
-                        @endif
-                    </div>
-                </div>
-
-                {{-- Quick Tip Card --}}
-                <div class="card card-round" style="background-color: #2d6a4f; color: white;">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-2">
-                            <i class="fas fa-lightbulb me-2" style="color:#f9c74f;"></i> Quick Tip
-                        </h6>
-                        <p class="mb-0" style="font-size:13px; opacity:0.9;">
-                            Providing a clear description and specific location improves the chances of item recovery. Admins typically process reports within 24 hours.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Your Reported Items --}}
-        <div class="row">
-            <div class="col-md-12">
+                {{-- Reported Items (below Activity Log) --}}
                 <div class="card card-round">
                     <div class="card-header">
                         <div class="card-head-row">
@@ -278,6 +235,52 @@ use App\Models\Item;
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            {{-- RIGHT SIDE: Updates + Quick Tip --}}
+            <div class="col-md-4">
+
+                {{-- Updates Card --}}
+                <div class="card card-round mb-4">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Updates</div>
+                            <span class="badge bg-primary ms-2">
+                                {{ App\Models\Item::where('status', 'Pending')->count() }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body text-center py-5">
+                        @if(App\Models\Item::where('user_id', Auth::id())->where('status', 'Pending')->count() > 0)
+                            @foreach(App\Models\Item::where('user_id', Auth::id())->where('status','Pending')->latest()->take(3)->get() as $pending)
+                                <div class="d-flex align-items-center mb-3 text-start">
+                                    <i class="fas fa-circle text-warning me-2" style="font-size:8px;"></i>
+                                    <div>
+                                        <p class="mb-0 fw-bold">{{ $pending->name }}</p>
+                                        <small class="text-muted">{{ $pending->type }} — Pending</small>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <i class="fas fa-check-circle text-success mb-3" style="font-size:48px;"></i>
+                            <p class="text-muted">All caught up!</p>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Quick Tip Card --}}
+                <div class="card card-round" style="background-color: #2d6a4f; color: white;">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-2">
+                            <i class="fas fa-lightbulb me-2" style="color:#f9c74f;"></i> Quick Tip
+                        </h6>
+                        <p class="mb-0" style="font-size:13px; opacity:0.9;">
+                            Providing a clear description and specific location improves the chances of item recovery. Admins typically process reports within 24 hours.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
