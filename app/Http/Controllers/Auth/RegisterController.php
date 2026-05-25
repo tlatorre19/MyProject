@@ -24,9 +24,15 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'role'       => ['required', 'in:student,instructor'],
             'name'       => ['required', 'string', 'max:255'],
-            'student_id' => ['nullable', 'string', 'max:50'],
+            'student_id' => [
+                'nullable',
+                'string',
+                'regex:/^\d{4}-\d{5}$/',
+            ],
             'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'   => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'student_id.regex' => 'Student ID must be in the format YYYY-NNNNN (e.g. 2024-00593). Numbers only.',
         ]);
     }
 
